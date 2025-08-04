@@ -1,5 +1,5 @@
 import { Animal } from "@/hooks/useAnimals";
-import { HiOutlineInformationCircle } from "react-icons/hi2";
+import InfoIcon from "@/icons/InfoIcon";
 
 interface Props {
   animal: Animal;
@@ -8,40 +8,48 @@ interface Props {
 
 export default function AnimalCard({ animal, onSelect }: Props) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 w-full">
+    <div className="bg-white border border-neutral-300 rounded-lg p-4 w-full mx-auto">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div
             className="w-8 h-8 rounded-full"
             style={{ backgroundColor: animal.color }}
           />
           <div>
-            <h2 className="font-semibold text-md text-black">{animal.name}</h2>
-            <p className="text-sm text-gray-500">{animal.species}</p>
+            <h2 className="font-semibold text-base text-neutral-900">
+              {animal.name}
+            </h2>
+            <p className="text-xs text-neutral-700">{animal.species}</p>
           </div>
         </div>
-        <button
-          onClick={() => onSelect(animal)}
-          className="text-gray-500 hover:text-black"
-        >
-          <HiOutlineInformationCircle className="w-5 h-5" />
+        <button className="cursor-pointer" onClick={() => onSelect(animal)}>
+          <InfoIcon />
         </button>
       </div>
 
-      <hr className="my-4 border-dashed" />
+      <hr className="my-4 border-solid border-neutral-300" />
 
-      <div className="space-y-2 text-sm text-gray-600">
+      <div className="space-y-2">
         <div className="flex justify-between">
-          <span className="text-gray-500">Size</span>
-          <span className="capitalize">{animal.size}</span>
+          <span className="text-neutral-700 text-xs">Size</span>
+          <div className="border-neutral-200 border-dashed border-b flex-1 mx-2" />
+          <span className="capitalize text-neutral-500 text-xs">
+            {animal.size}
+          </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-500">Prey</span>
-          <span>{animal.prey.length}</span>
+          <span className="text-neutral-700 text-xs">Prey</span>
+          <div className="border-neutral-200 border-dashed border-b flex-1 mx-2" />
+
+          <span className="text-neutral-500 text-xs">{animal.prey.length}</span>
         </div>
         <div className="flex justify-between">
-          <span className="text-gray-500">Predators</span>
-          <span>{animal.predators.length}</span>
+          <span className="text-neutral-700 text-xs">Predators</span>
+          <div className="border-neutral-200 border-dashed border-b flex-1 mx-2" />
+
+          <span className="text-neutral-500 text-xs">
+            {animal.predators.length}
+          </span>
         </div>
       </div>
     </div>

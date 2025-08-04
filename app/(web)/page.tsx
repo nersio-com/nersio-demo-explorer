@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { useAnimals, Animal } from "@/hooks/useAnimals";
 import AnimalGrid from "@/components/AnimalGrid";
 import Header from "@/components/Header";
-import AnimalPanel from "@/components/AnimalPanel";
-import { useMemo } from "react";
+import AnimalSidebar from "@/components/AnimalSidebar";
+import { useMemo, useState, useEffect } from "react";
 
 export default function HomePage() {
   const { data: animals = [], isLoading, isError } = useAnimals();
@@ -20,19 +19,31 @@ export default function HomePage() {
     );
   }, [animals, query]);
 
+  useEffect(() => {
+    const handler = (e: CustomEvent) => {
+      setSelectedAnimal(e.detail);
+    };
+
+    window.addEventListener("animal-select", handler as EventListener);
+
+    return () => {
+      window.removeEventListener("animal-select", handler as EventListener);
+    };
+  }, []);
+
   return (
-    <main className="max-w-[1800px] mx-auto h-screen flex overflow-hidden pt-2">
+    <main className="w-full max-w-[1600px] mx-auto h-screen flex gap-2 overflow-hidden pt-2 px-2 bg-neutral-200">
       <div className="flex-1 flex flex-col">
         <Header query={query} setQuery={setQuery} />
-        <div className="flex-1 overflow-y-auto mt-12 p-4 bg-gray-50">
-          {isLoading && <p>Loading...</p>}
+        <div className="flex-1 w-full mx-auto overflow-y-auto p-4 bg-gray-50">
+          {isLoading && <p>Loading animals...</p>}
           {isError && <p>Failed to load animals.</p>}
           <AnimalGrid animals={filtered} onSelect={setSelectedAnimal} />
         </div>
       </div>
 
       {selectedAnimal && (
-        <AnimalPanel
+        <AnimalSidebar
           animal={selectedAnimal}
           onClose={() => setSelectedAnimal(null)}
         />

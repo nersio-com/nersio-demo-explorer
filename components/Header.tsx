@@ -1,5 +1,7 @@
 "use client";
 
+import SearchIcon from "@/icons/SearchIcon";
+
 interface Props {
   query: string;
   setQuery: (value: string) => void;
@@ -7,17 +9,20 @@ interface Props {
 
 export default function Header({ query, setQuery }: Props) {
   return (
-    <header className="fixed top-2 right-0 left-0 m-auto max-w-[1800px] w-full h-[52px] px-4 py-3 border-b border-gray-200 bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 rounded-t-lg">
-      <h1 className="text-xl font-semibold text-gray-800">Animal Finder</h1>
+    <header className="sticky w-full max-w-[1600px] left-0 right-0 mx-auto h-13 px-4 py-3 border border-neutral-300 bg-white flex flex-row items-center justify-between gap-3 rounded-t-lg">
+      <h1 className="text-base font-semibold text-neutral-900">
+        Animal Finder
+      </h1>
 
-      <div className="relative w-full sm:w-80">
-        <input
-          type="text"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Search"
-          className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/20"
-        />
+      <input
+        type="text"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        placeholder="Search"
+        className="sm:w-40 md:w-80 w-35 pl-6 pr-3 py-2 bg-neutral-100 rounded-lg focus:outline-none text-sm text-neutral-800 placeholder-neutral-500"
+      />
+      <div className="absolute right-7">
+        <SearchIcon />
       </div>
     </header>
   );

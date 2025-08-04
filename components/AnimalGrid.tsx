@@ -8,7 +8,7 @@ interface Props {
 
 export default function AnimalGrid({ animals, onSelect }: Props) {
   return (
-    <div className="max-w-[1800px] w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 bg-white rounded-t-lg">
+    <div className="w-full grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] xl:grid-cols-4 gap-4 bg-neutral-50 rounded-t-lg justify-center">
       {animals.map(animal => (
         <AnimalCard key={animal.id} animal={animal} onSelect={onSelect} />
       ))}
